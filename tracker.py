@@ -20,23 +20,42 @@ listener = mouse.Listener(
 listener_mode = 0
 while True:
     # Получаем текущее время
-    minute_start = datetime.now()
-    if minute_start.strftime("%Y-%m-%d %H:%M:%S")[-2:] == '00':
-        actions = []
-        print("Начало минуты", minute_start)
-        time.sleep(1)
-        while datetime.now()<minute_start + timedelta(seconds=59):
-            if listener_mode == 0:
-                listener.start()
-                listener_mode = 1
-        minute_end = datetime.now()
-        print("Конец минуты", minute_end)
-        print(len(actions))
-        with open('c.txt','a') as f:
+    start = datetime.now()
+    if listener_mode == 0:
+        listener.start()
+        listener_mode = 1
+    time.sleep(5)
+    end = datetime.now()
+    with open('c.txt','a') as f:
             if len(actions) != 0:
-                f.write(minute_start.strftime("%Y-%m-%d %H:%M:%S") +","+ minute_end.strftime("%Y-%m-%d %H:%M:%S"+","+str(len(actions))+'\n'))
-                #f.write("Начало минуты" + minute_start.strftime("%Y-%m-%d %H:%M:%S") +" Конец минуты "+ minute_end.strftime("%Y-%m-%d %H:%M:%S"+" "+str(len(actions))+'\n'))
+                f.write(start.strftime("%Y-%m-%d %H:%M:%S") +","+ end.strftime("%Y-%m-%d %H:%M:%S"+","+str(len(actions))+'\n'))
+                #f.write("Начало минуты" + start.strftime("%Y-%m-%d %H:%M:%S") +" Конец минуты "+ end.strftime("%Y-%m-%d %H:%M:%S"+" "+str(len(actions))+'\n'))
             else:
-                f.write(minute_start.strftime("%Y-%m-%d %H:%M:%S") +","+ minute_end.strftime("%Y-%m-%d %H:%M:%S"+","+'0'+'\n'))
-                #f.write("Начало минуты" + minute_start.strftime("%Y-%m-%d %H:%M:%S") +" Конец минуты "+ minute_end.strftime("%Y-%m-%d %H:%M:%S")+' 0'+'\n')
+                f.write(start.strftime("%Y-%m-%d %H:%M:%S") +","+ end.strftime("%Y-%m-%d %H:%M:%S"+","+'0'+'\n'))
+                #f.write("Начало минуты" + start.strftime("%Y-%m-%d %H:%M:%S") +" Конец минуты "+ end.strftime("%Y-%m-%d %H:%M:%S")+' 0'+'\n')
+    actions = []
+
+
+
+
+
+
+
+
+
+
+
+
+    # if start.strftime("%Y-%m-%d %H:%M:%S")[-2:] == '00':
+    #     actions = []
+    #     print("Начало минуты", start)
+    #     time.sleep(1)
+    #     while datetime.now()<start + timedelta(seconds=59):
+    #         if listener_mode == 0:
+    #             listener.start()
+    #             listener_mode = 1
+    #     end = datetime.now()
+    #     print("Конец минуты", end)
+    #     print(len(actions))
+        
         
